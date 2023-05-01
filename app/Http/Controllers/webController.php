@@ -2,15 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Portfolio;
 use Illuminate\Http\Request;
 
-class webController extends Controller
+class WebController extends Controller
 {
-    public function index(Request $request){
-        return view('welcome');
-    }
+    /**
+     * Display a listing of the resource.
+     */
 
-    public function admin(Request $request){
-        return view('admin.admin');
+    public function show(string $id)
+    {
+        $data = Portfolio::findOrFail($id);
+
+        return view('portfolio', compact('data'));
+
+        // return view('portfolio');
     }
 }

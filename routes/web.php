@@ -1,8 +1,12 @@
 <?php
 
-use App\Http\Controllers\webController;
+use App\Http\Controllers\AboutMeController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\PortfolioController;
+use App\Http\Controllers\SkillController;
+use App\Http\Controllers\TestController;
+use App\Http\Controllers\WebController;
+use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -17,7 +21,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [webController::class, 'index']);
+// Route::get('/', [webController::class, 'index']);
+// Route::get('/portfolio-details', [webController::class, 'portfolio']);
+// Route::get('/', [WebController::class, 'index']);
+Route::get('/',[WelcomeController::class, 'index']);
+Route::resource('/portofolio', WebController::class);
 // Route::get('/admin', [webController::class, 'admin']);
 Route::group(['prefix' => '/admin'], function(){
     Route::get('/', [AdminController::class, 'starter'])->name('admin.admin');
@@ -40,4 +48,7 @@ Auth::routes([
 
 Route::get('/admin', [App\Http\Controllers\HomeController::class, 'index'])->name('admin');
 
+//admin editable resources
 Route::resource('/admin/portfolios', PortfolioController::class);
+Route::resource('/admin/aboutmes', AboutMeController::class);
+Route::resource('/admin/aboutmes/skills', SkillController::class);

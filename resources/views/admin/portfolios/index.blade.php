@@ -1,6 +1,6 @@
-@extends('admin.layouts.adminlayout')
+@extends('admin.layouts.editlayout')
 
-@section('title', 'Starter')
+@section('title', 'Portfolio')
 
 @section('content')
 
@@ -26,75 +26,64 @@
         <div class="content">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-lg-6">
+                    <div class="col">
                         <div class="card">
                             <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
                                 <table class="table table-hover table-bordered">
                                     <thead>
                                         <tr>
                                             <th>No</th>
                                             <th>Image</th>
+                                            <th>Category</th>
                                             <th>Title</th>
                                             <th>Description</th>
+                                            <th>Portfolio Date</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @foreach ($data as $index => $item)
-                                        <tr>
-                                            <td>{{ $index + 1 }}</td>
-                                            <td>{{ $item->image_file_url }}</td>
-                                            <td>{{ $item->title }}</td>
-                                            <td>{{ $item->description }}</td>
-                                        </tr>
+                                            <tr>
+                                                <td>{{ $index + 1 }}</td>
+                                                <td><img src="{{ asset($item->image_file_url) }}" alt="" width="200"></td>
+                                                <td>
+                                                    @if ($item->category_id == 1)
+                                                    Web Design
+                                                @elseif ($item->category_id == 2)
+                                                    App Design
+                                                @elseif ($item->category_id == 3)
+                                                    Volunteer
+                                                @elseif ($item->category_id == 4)
+                                                    Experience
+                                                @elseif ($item->category_id == 5)
+                                                    Organization
+                                                @else
+                                                    Other
+                                                @endif
+                                                </td>
+                                                <td>{{ $item->title }}</td>
+                                                <td>{{ $item->description }}</td>
+                                                <td>{{ $item->portfolio_date }}</td>
+                                                <td><a href="{{ route('portfolios.edit', $item->id) }}" class="btn btn-warning btn-sm">
+                                                Edit </a>
+                                                <button class="btn btn-danger btn-sm" onclick="event.preventDefault();
+                                                document.getElementById('delete-portfolio-{{ $item->id }}').submit();">Delete</button>
+                                                <form id="delete-portfolio-{{ $item->id }}" action="{{ route('portfolios.destroy', $item->id) }}" method="post">
+                                                    @csrf
+                                                    @method('delete')
+                                                </form>
+                                            </td>
+                                            </tr>
                                         @endforeach
                                     </tbody>
                                 </table>
                             </div>
-                        </div>
-
-                        <div class="card card-primary card-outline">
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-
-                                <p class="card-text">
-                                    Some quick example text to build on the card title and make up the bulk of the card's
-                                    content.
-                                </p>
-                                <a href="#" class="card-link">Card link</a>
-                                <a href="#" class="card-link">Another link</a>
+                            <div class="card-footer">
+                                <a class="btn btn-primary" href="{{ route('portfolios.create') }}">Add</a>
                             </div>
-                        </div><!-- /.card -->
+                        </div>
                     </div>
                     <!-- /.col-md-6 -->
-                    <div class="col-lg-6">
-                        <div class="card">
-                            <div class="card-header">
-                                <h5 class="m-0">Featured</h5>
-                            </div>
-                            <div class="card-body">
-                                <h6 class="card-title">Special title treatment</h6>
-
-                                <p class="card-text">With supporting text below as a natural lead-in to additional content.
-                                </p>
-                                <a href="#" class="btn btn-primary">Go somewhere</a>
-                            </div>
-                        </div>
-
-                        <div class="card card-primary card-outline">
-                            <div class="card-header">
-                                <h5 class="m-0">Featured</h5>
-                            </div>
-                            <div class="card-body">
-                                <h6 class="card-title">Special title treatment</h6>
-
-                                <p class="card-text">With supporting text below as a natural lead-in to additional content.
-                                </p>
-                                <a href="#" class="btn btn-primary">Go somewhere</a>
-                            </div>
-                        </div>
-                    </div>
                     <!-- /.col-md-6 -->
                 </div>
                 <!-- /.row -->
