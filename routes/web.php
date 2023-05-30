@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AboutMeController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PortfolioController;
 use App\Http\Controllers\SkillController;
 use App\Http\Controllers\TestController;
@@ -50,5 +51,6 @@ Route::get('/admin', [App\Http\Controllers\HomeController::class, 'index'])->nam
 
 //admin editable resources
 Route::resource('/admin/portfolios', PortfolioController::class);
+Route::resource('/admin/categories', CategoryController::class);
 Route::resource('/admin/aboutmes', AboutMeController::class);
 Route::resource('/admin/aboutmes/skills', SkillController::class);

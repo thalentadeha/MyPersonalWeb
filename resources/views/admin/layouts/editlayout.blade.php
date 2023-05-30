@@ -59,6 +59,14 @@
                             </a>
                         </li>
                         <li class="nav-item">
+                            <a href="{{ route('categories.index') }}" class="nav-link">
+                                <i class="nav-icon fas fa-edit"></i>
+                                <p>
+                                    Categories
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a href="{{ route('admin') }}" class="nav-link">
                                 <i class="nav-icon fas fa-arrow-left"></i>
                                 <p>

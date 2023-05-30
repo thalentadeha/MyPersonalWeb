@@ -2,26 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
+use App\Http\Requests\AddPortfolioRequest;
+use App\Http\Requests\DeletePortfolioRequest;
 use App\Models\Portfolio;
 use Illuminate\Http\Request;
 
-class PortfolioController extends Controller
+use function GuzzleHttp\Promise\all;
+
+class ApiController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-
-     public function __construct()
-     {
-         $this->middleware('auth');
-     }
     public function index()
     {
         $data = Portfolio::all();
-        // $cat = Portfolio::orderBy(Category::select('category_name')->whereColumn('id', 'portfolios.category_id'))->get();
 
-        return view('admin.portfolios.index', compact('data'));
+        return response($data);
     }
 
     /**
@@ -29,21 +26,14 @@ class PortfolioController extends Controller
      */
     public function create()
     {
-        return view('admin.portfolios.create');
+        //
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(AddPortfolioRequest $request)
     {
-        $request->validate([
-            'title' => 'required',
-            'description' => 'required',
-            'category_id' => 'required',
-            'image_file' => 'required',
-            'portfolio_date' => 'required',
-        ]);
 
         $imagePath = $request->file('image_file')->store('photo', ['disk' => 'public']);
 
@@ -55,7 +45,7 @@ class PortfolioController extends Controller
         $newPortfolio->portfolio_date = $request->portfolio_date;
         $newPortfolio->save();
 
-        return redirect()->route('portfolios.index');
+        return response('add portfolio success');
     }
 
     /**
@@ -65,29 +55,20 @@ class PortfolioController extends Controller
     {
         //
     }
+
     /**
      * Show the form for editing the specified resource.
      */
     public function edit(string $id)
     {
-        $data = Portfolio::findOrFail($id);
-
-        return view('admin.portfolios.edit', compact('data'));
+        //
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(AddPortfolioRequest $request, string $id)
     {
-        $request->validate([
-            'title' => 'required',
-            'description' => 'required',
-            'category_id' => 'required',
-            'image_file' => 'required',
-            'portfolio_date' => 'required',
-        ]);
-
         $imagePath = $request->file('image_file')->store('photo', ['disk' => 'public']);
 
         $editPortfolio = Portfolio::findOrFail($id);
@@ -98,17 +79,17 @@ class PortfolioController extends Controller
         $editPortfolio->image_file_url = '/storage/' . $imagePath;
         $editPortfolio->save();
 
-        return redirect()->route('portfolios.index');
+        return response('update portfolios success');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(DeletePortfolioRequest $request, string $id)
     {
         $deletePortfolio = Portfolio::findOrFail($id);
         $deletePortfolio->delete();
 
-        return redirect()->route('portfolios.index');
+        return response('delete portfolio success');
     }
 }

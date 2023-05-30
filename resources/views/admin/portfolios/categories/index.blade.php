@@ -15,7 +15,7 @@
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Porfolios</li>
+                            <li class="breadcrumb-item active">Porfolio Categories</li>
                         </ol>
                     </div><!-- /.col -->
                 </div><!-- /.row -->
@@ -32,25 +32,20 @@
                                 <table class="table table-hover table-bordered">
                                     <thead>
                                         <tr>
-                                            <th>No</th>
-                                            <th>Image</th>
-                                            <th>Category</th>
-                                            <th>Title</th>
-                                            <th>Description</th>
-                                            <th>Portfolio Date</th>
-                                            <th>Action</th>
+                                            <th>Category ID</th>
+                                            <th>Category Name</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @foreach ($data as $index => $item)
                                             <tr>
-                                                <td>{{ $index + 1 }}</td>
-                                                <td><img src="{{ asset($item->image_file_url) }}" alt="" width="200"></td>
-                                                <td>{{ $item->category->category_name }}
-                                                <td>{{ $item->title }}</td>
-                                                <td>{{ $item->description }}</td>
-                                                <td>{{ $item->portfolio_date }}</td>
-                                                <td><a href="{{ route('portfolios.edit', $item->id) }}" class="btn btn-warning btn-sm">
+                                                <td>
+                                                {{ $item->id }}
+                                                </td>
+                                                <td>
+                                                {{ $item->category_name }}
+                                                </td>
+                                                <td><a href="{{ route('categories.edit', $item->id) }}" class="btn btn-warning btn-sm">
                                                 Edit </a>
                                                 <button class="btn btn-danger btn-sm" onclick="event.preventDefault();
                                                 document.getElementById('delete-portfolio-{{ $item->id }}').submit();">Delete</button>
@@ -65,7 +60,7 @@
                                 </table>
                             </div>
                             <div class="card-footer">
-                                <a class="btn btn-primary" href="{{ route('portfolios.create') }}">Add</a>
+                                <a class="btn btn-primary" href="{{ route('categories.create') }}">Add</a>
                             </div>
                         </div>
                     </div>
