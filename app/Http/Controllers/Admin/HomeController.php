@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Models\AboutMe;
 use App\Models\Portfolio;
 use App\Models\Skill;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class HomeController extends Controller
 {
@@ -26,7 +27,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $dataPortfolio = Portfolio::all();
+        $dataPortfolio = Portfolio::with('categories')->get();
         $dataAboutMe = AboutMe::all();
         $dataSkill = Skill::all();
 

@@ -46,14 +46,13 @@
                                             <tr>
                                                 <td>{{ $index + 1 }}</td>
                                                 <td><img src="{{ asset($item->image_file_url) }}" alt="" width="200"></td>
-                                                <td>{{ $item->category->category_name }}
+                                                <td>{{ $item->categories->name }}
                                                 <td>{{ $item->title }}</td>
                                                 <td>{{ $item->description }}</td>
                                                 <td>{{ $item->portfolio_date }}</td>
                                                 <td><a href="{{ route('portfolios.edit', $item->id) }}" class="btn btn-warning btn-sm">
                                                 Edit </a>
-                                                <button class="btn btn-danger btn-sm" onclick="event.preventDefault();
-                                                document.getElementById('delete-portfolio-{{ $item->id }}').submit();">Delete</button>
+                                                <a class="btn btn-danger btn-sm" onclick="showDeleteConfirmation('delete-portfolio-{{ $item->id }}')">Delete</a>
                                                 <form id="delete-portfolio-{{ $item->id }}" action="{{ route('portfolios.destroy', $item->id) }}" method="post">
                                                     @csrf
                                                     @method('delete')

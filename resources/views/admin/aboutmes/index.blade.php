@@ -99,8 +99,7 @@
                                                     <a href="{{ route('skills.edit', $skill->id) }}"
                                                         class="btn btn-warning btn-sm">Edit</a>
                                                     <button class="btn btn-danger btn-sm"
-                                                        onclick="event.preventDefault();
-                                                document.getElementById('delete-portfolio-{{ $skill->id }}').submit();">Delete</button>
+                                                        onclick="showDeleteConfirmation('delete-portfolio-{{ $skill->id }}')">Delete</button>
                                                     <form id="delete-portfolio-{{ $skill->id }}"
                                                         action="{{ route('skills.destroy', $skill->id) }}" method="post">
                                                         @csrf

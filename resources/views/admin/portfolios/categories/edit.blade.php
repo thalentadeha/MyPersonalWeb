@@ -40,7 +40,7 @@
                                         <div class="form-group">
                                             <label>Category Name</label>
                                             <input type="text" class="form-control @error('cat_name') is-invalid @enderror" placeholder="Enter cat_name"
-                                                name="cat_name" value="{{ $data->category_name }}">
+                                                name="cat_name" value="{{ $data->name }}">
 
                                                 @error('cat_name')
                                                 <span class="invalid-feedback" role="alert">

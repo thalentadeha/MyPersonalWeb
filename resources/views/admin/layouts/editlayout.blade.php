@@ -15,6 +15,8 @@
     <link rel="stylesheet" href="{{ asset('adminLTE/plugins/overlayScrollbars/css/OverlayScrollbars.min.css') }}">
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('adminLTE/dist/css/adminlte.min.css') }}">
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/5.0.7/sweetalert2.min.css" rel="stylesheet">
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -108,6 +110,33 @@
     <script src="{{ asset('adminLTE/dist/js/adminlte.min.js') }}"></script>
     <!-- AdminLTE for demo purposes -->
     {{-- <script src="{{ asset('adminLTE/dist/js/demo.js') }}"></script> --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+
+    <script type="text/javascript">
+        window.deleteConfirm = function(e) {
+            e.preventDefault();
+            var form = e.target.form;
+            swal({
+                    title: "Are you sure you want to delete?",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        form.submit();
+                    }
+                });
+        }
+    </script>
+    <script>
+        function showDeleteConfirmation(formId) {
+            if (confirm('Are You Sure Want To Delete?')) {
+                document.getElementById(formId).submit();
+            }
+        }
+    </script>
 </body>
 
 </html>

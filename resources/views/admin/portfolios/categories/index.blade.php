@@ -43,13 +43,12 @@
                                                 {{ $item->id }}
                                                 </td>
                                                 <td>
-                                                {{ $item->category_name }}
+                                                {{ $item->name }}
                                                 </td>
                                                 <td><a href="{{ route('categories.edit', $item->id) }}" class="btn btn-warning btn-sm">
                                                 Edit </a>
-                                                <button class="btn btn-danger btn-sm" onclick="event.preventDefault();
-                                                document.getElementById('delete-portfolio-{{ $item->id }}').submit();">Delete</button>
-                                                <form id="delete-portfolio-{{ $item->id }}" action="{{ route('portfolios.destroy', $item->id) }}" method="post">
+                                                <button class="btn btn-danger btn-sm" onclick="showDeleteConfirmation('delete-portfolio-{{ $item->id }}')">Delete</button>
+                                                <form id="delete-portfolio-{{ $item->id }}" action="{{ route('categories.destroy', $item->id) }}" method="post">
                                                     @csrf
                                                     @method('delete')
                                                 </form>

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Portfolio;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -25,7 +25,7 @@ class UpdatePortfolioRequest extends FormRequest
             'title' => 'required',
             'description' => 'required',
             'category_id' => 'required',
-            'image_file' => 'required',
+            'image_file' => 'required|image',
             'portfolio_date' => 'required',
         ];
     }

@@ -55,19 +55,8 @@
                             <h3>Portfolio Details</h3>
                             <ul>
                                 <li><strong>Title</strong>: {{ $data->title }}</li>
-                                <li><strong>Category</strong>: @if ($data->category_id == 1)
-                                    Web Design
-                                @elseif ($data->category_id == 2)
-                                    App Design
-                                @elseif ($data->category_id == 3)
-                                    Volunteer
-                                @elseif ($data->category_id == 4)
-                                    Experience
-                                @elseif ($data->category_id == 5)
-                                    Organization
-                                @else
-                                    Other
-                                @endif
+                                <li><strong>Category</strong>:
+                                    {{ $data->categories->name }}
                                 </li>
                                 <li><strong>Event date</strong>: {{ $data->portfolio_date }}</li>
                             </ul>

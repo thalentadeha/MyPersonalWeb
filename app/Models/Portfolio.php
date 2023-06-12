@@ -13,7 +13,7 @@ class Portfolio extends Model
 
     public function categories(): BelongsTo
     {
-        return $this->belongsTo(Category::class);
+        return $this->belongsTo(Category::class, 'category_id', 'id');
     }
 
     // protected $table = 'portfolio';

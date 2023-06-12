@@ -93,8 +93,7 @@
                             <a href="{{ route('skills.edit', $skill->id) }}"
                                 class="btn btn-warning btn-sm">Edit</a>
                             <button class="btn btn-danger btn-sm"
-                                onclick="event.preventDefault();
-                        document.getElementById('delete-portfolio-{{ $skill->id }}').submit();">Delete</button>
+                                onclick="showDeleteConfirmation('delete-portfolio-{{ $skill->id }}')">Delete</button>
                             <form id="delete-portfolio-{{ $skill->id }}"
                                 action="{{ route('skills.destroy', $skill->id) }}" method="post">
                                 @csrf
@@ -165,27 +164,14 @@
                                     <h2 class="w-title">{{ $item->title }}</h2>
                                     <div class="w-more">
                                         <span class="w-ctegory">
-                                            @if ($item->category_id == 1)
-                                            Web Design
-                                        @elseif ($item->category_id == 2)
-                                            App Design
-                                        @elseif ($item->category_id == 3)
-                                            Volunteer
-                                        @elseif ($item->category_id == 4)
-                                            Experience
-                                        @elseif ($item->category_id == 5)
-                                            Organization
-                                        @else
-                                            Other
-                                        @endif
+                                            {{ $item->categories->name }}
                                         </span> / <span class="w-date">{{ $item->portfolio_date }}</span>
                                     </div>
                                 </div>
                                 <div class="col-sm-4">
                                     <a href="{{ route('portfolios.edit', $item->id) }}" class="btn btn-warning btn-sm">
                                         Edit </a>
-                                        <button class="btn btn-danger btn-sm" onclick="event.preventDefault();
-                                        document.getElementById('delete-portfolio-{{ $item->id }}').submit();">Delete</button>
+                                        <button class="btn btn-danger btn-sm" onclick="showDeleteConfirmation('delete-portfolio-{{ $item->id }}')">Delete</button>
                                         <form id="delete-portfolio-{{ $item->id }}" action="{{ route('portfolios.destroy', $item->id) }}" method="post">
                                             @csrf
                                             @method('delete')

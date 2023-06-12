@@ -1,10 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Models\AboutMe;
 use App\Models\Skill;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\File;
 
 class AboutMeController extends Controller
 {
@@ -47,11 +49,9 @@ class AboutMeController extends Controller
             'my_profile' => 'required',
             'my_email' => 'required',
             'my_number' => 'required',
-            'photo_file' => 'required',
+            'photo_file' => 'required|image',
             'my_description' => 'required',
         ]);
-
-        $imagePath = $request->file('photo_file')->store('photo', ['disk' => 'public']);
 
         $editAboutMe = AboutMe::findOrFail($id);
         $editAboutMe->my_name = $request->my_name;
@@ -59,7 +59,14 @@ class AboutMeController extends Controller
         $editAboutMe->my_email = $request->my_email;
         $editAboutMe->my_number = $request->my_number;
         $editAboutMe->my_description = $request->my_description;
-        $editAboutMe->photo_file_url = '/storage/' . $imagePath;
+        if ($request->hasFile('photo_file')) {
+            // delete old image
+            File::delete($editAboutMe->photo_file_url);
+
+            // and store new image
+            $imagePath = $request->file('photo_file')->store('photo', ['disk' => 'public']);
+            $editAboutMe->photo_file_url = $imagePath;
+        }
         $editAboutMe->save();
 
         return redirect()->route('aboutmes.index');

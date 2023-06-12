@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Category;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class AddPortfolioRequest extends FormRequest
+class AddCategoryRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -17,16 +17,12 @@ class AddPortfolioRequest extends FormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array<string, \Illuminate\Contracts\Validation\Rule|array|string>
+     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array|string>
      */
     public function rules(): array
     {
         return [
-            'title' => 'required',
-            'description' => 'required',
-            'category_id' => 'required',
-            'image_file' => 'required',
-            'portfolio_date' => 'required',
+            'cat_name' => 'required',
         ];
     }
 }

@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Models\Category;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class CategoryController extends Controller
 {
@@ -40,7 +41,7 @@ class CategoryController extends Controller
         ]);
 
         $newCategory = new Category();
-        $newCategory->category_name =  $request->cat_name;
+        $newCategory->name =  $request->cat_name;
         $newCategory->save();
 
         return redirect()->route('categories.index');
@@ -75,7 +76,7 @@ class CategoryController extends Controller
 
 
         $editCategory = Category::findOrFail($id);
-        $editCategory->category_name = $request->cat_name;
+        $editCategory->name = $request->cat_name;
         $editCategory->save();
 
         return redirect()->route('categories.index');
@@ -86,6 +87,9 @@ class CategoryController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $deleteCategory = Category::findOrFail($id);
+        $deleteCategory->delete();
+
+        return redirect()->route('categories.index');
     }
 }

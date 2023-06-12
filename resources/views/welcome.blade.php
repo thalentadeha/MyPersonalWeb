@@ -111,6 +111,16 @@
                         </div>
                     </div>
                 </div>
+                {{-- <div class="row">
+                    <div class="col-lg-12 d-flex justify-content-center" data-aos="fade-up" data-aos-delay="100">
+                      <ul id="portfolio-flters">
+                        <li data-filter="*" class="filter-active">All</li>
+                        <li data-filter=".filter-app">App</li>
+                        <li data-filter=".filter-card">Card</li>
+                        <li data-filter=".filter-web">Web</li>
+                      </ul>
+                    </div>
+                  </div> --}}
                 <div class="row">
                     @foreach ($PortfolioList as $index => $item)
                         <div class="col-md-4">
@@ -127,19 +137,7 @@
                                             <h2 class="w-title">{{ $item->title }}</h2>
                                             <div class="w-more">
                                                 <span class="w-ctegory">
-                                                    @if ($item->category_id == 1)
-                                                        Web Design
-                                                    @elseif ($item->category_id == 2)
-                                                        App Design
-                                                    @elseif ($item->category_id == 3)
-                                                        Volunteer
-                                                    @elseif ($item->category_id == 4)
-                                                        Experience
-                                                    @elseif ($item->category_id == 5)
-                                                        Organization
-                                                    @else
-                                                        Other
-                                                    @endif
+                                                    {{ $item->categories->name }}
                                                 </span> / <span class="w-date">{{ $item->portfolio_date }}</span>
                                             </div>
                                         </div>

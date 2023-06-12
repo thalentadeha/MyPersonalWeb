@@ -59,18 +59,10 @@
                                         </div>
                                         <div class="form-group">
                                             <label>Category</label>
+                                            @foreach ($data as $index => $item)
                                             <input type="radio" class="form-control @error('category_id') is-invalid @enderror"
-                                                name="category_id" value="1">Web Design
-                                            <input type="radio" class="form-control @error('category_id') is-invalid @enderror"
-                                                name="category_id" value="2">App Design
-                                            <input type="radio" class="form-control @error('category_id') is-invalid @enderror"
-                                                name="category_id" value="3">Volunteer
-                                            <input type="radio" class="form-control @error('category_id') is-invalid @enderror"
-                                                name="category_id" value="4">Experience
-                                            <input type="radio" class="form-control @error('category_id') is-invalid @enderror"
-                                                name="category_id" value="5">Organization
-                                                <input type="radio" class="form-control @error('category_id') is-invalid @enderror"
-                                                name="category_id" value="9">Other
+                                            name="category_id" value="{{ $item->id }}">{{ $item->name }}
+                                            @endforeach
                                             @error('category_id')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
