@@ -6,6 +6,11 @@
 *.md diff=markdown
 *.php diff=php
 
+*.js linguist-detectable=false
+*.html linguist-detectable=false
+*.css linguist-detectable=false
+*.php linguist-detectable=true 
+
 /.github export-ignore
 CHANGELOG.md export-ignore
 .styleci.yml export-ignore
